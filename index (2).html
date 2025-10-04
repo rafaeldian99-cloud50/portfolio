@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dipan Das - Creative CSE Portfolio</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  /* Root colors */
+  :root {
+    --primary: #0b1120;
+    --accent1: #00b0ff;
+    --accent2: #00ffc4;
+    --card-bg: rgba(255 255 255 / 0.15);
+    --glass-shadow: rgba(255 255 255 / 0.3);
+    --text-light: #f0f0f5;
+    --text-dark: #12171f;
+    --bg-light: #e0e9f7;
+    --bg-dark: #0b1120;
+  }
+  [data-theme="dark"] {
+    --primary: #0b1120;
+    --accent1: #00b0ff;
+    --accent2: #00ffc4;
+    --card-bg: rgba(10 30 50 / 0.25);
+    --glass-shadow: rgba(15 45 65 / 0.6);
+    --text-light: #dce4f2;
+    --text-dark: #f0f0f5;
+    --bg-light: #0a1624;
+    --bg-dark: #0b1120;
+  }
+  /* Base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-45deg, var(--accent1), var(--accent2), var(--primary));
+    background-size: 400% 400%;
+    animation: gradientShift 14s ease infinite;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+  }
+  @keyframes gradientShift {
+    0%,100% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+  }
+  header {
+    text-align: center;
+    padding: 90px 10px 70px 10px;
+    margin-bottom: 42px;
+    color: var(--text-light);
+  }
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 1.8px 1.8px 6px rgba(0, 0, 0, 0.48);
+  }
+  .tagline {
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 1.3px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+  }
+  nav a {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    backdrop-filter: brightness(2);
+  }
+  nav a:hover {
+    background: var(--text-light);
+    color: var(--primary);
+    box-shadow: 0 0 12px var(--text-light);
+  }
+  .theme-toggle {
+    position: fixed;
+    top: 24px;
+    right: 30px;
+    background: var(--text-light);
+    color: var(--primary);
+    font-size: 1.35rem;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    box-shadow: 0 4px 13px rgba(0, 255, 205, 0.54);
+    transition: background 0.3s ease;
+    z-index: 2000;
+  }
+  main {
+    max-width: 960px;
+    padding: 0 20px 60px 20px;
+    margin: 0 auto 0 auto;
+  }
+  section {
+    margin-bottom: 54px;
+    background: var(--card-bg);
+    padding: 34px 28px 28px 28px;
+    border-radius: 23px;
+    box-shadow: 0 4px 20px var(--glass-shadow);
+    backdrop-filter: blur(9px);
+    color: var(--text-light);
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+  h2 {
+    font-weight: 900;
+    font-size: 2.3rem;
+    margin-bottom: 22px;
+    border-bottom: 3px solid var(--text-light);
+    padding-bottom: 12px;
+  }
+  .bio-illustration {
+    float: right;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 35px 5px var(--text-light);
+    margin-left: 22px;
+    object-fit: cover;
+    filter: drop-shadow(0 6px 5px #00ffc4aa);
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    padding: 14px 26px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: inset 0 0 18px 2px var(--accent2);
+    cursor: default;
+    user-select: none;
+    transition: transform 0.31s ease;
+  }
+  .skill-card:hover {
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: inset 0 0 26px 3px var(--accent1);
+  }
+  .timeline {
+    display: flex;
+    overflow-x: auto;
+    gap: 32px;
+    padding-bottom: 10px;
+  }
+  .milestone {
+    min-width: 210px;
+    border-radius: 18px;
+    background: var(--card-bg);
+    box-shadow: 0 4px 24px var(--glass-shadow);
+    padding: 16px 18px 18px 18px;
+    font-weight: 700;
+    font-size: 1.03rem;
+    cursor: default;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .milestone:hover {
+    background: var(--accent2);
+    color: var(--primary);
+    box-shadow: 0 11px 30px #00ffd0cc;
+  }
+  .projects-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+  .project-card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    box-shadow: 0 4px 26px var(--glass-shadow);
+    padding: 22px 21px 24px 21px;
+    font-weight: 700;
+    font-size: 1.17rem;
+    cursor: pointer;
+    transition: transform 0.36s ease, box-shadow 0.36s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 14px 38px #00ffe8aa;
+    background: var(--accent2);
+    color: var(--primary);
+  }
+  .contact-section {
+    text-align: center;
+  }
+  .contact-btn {
+    background: var(--accent1);
+    color: var(--primary);
+    border-radius: 36px;
+    box-shadow: 0 0 32px #00ffe8cc;
+    cursor: pointer;
+    font-weight: 900;
+    padding: 18px 46px;
+    font-size: 1.37rem;
+    border: none;
+    transition: box-shadow 0.32s ease;
+  }
+  .contact-btn:hover {
+    box-shadow: 0 0 46px 8px #00fffacc;
+  }
+  .contact-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    min-width: 340px;
+    max-width: 96vw;
+    padding: 38px 28px;
+    background: var(--card-bg);
+    box-shadow: 0 13px 47px var(--glass-shadow);
+    border-radius: 18px;
+    transition: transform 0.33s ease;
+    text-align: left;
+    z-index: 1100;
+  }
+  .contact-modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 24px;
+    font-size: 2.1rem;
+    color: var(--accent1);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  footer {
+    text-align: center;
+    padding: 18px 0;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 1.1px;
+    color: var(--text-light);
+    background: var(--primary);
+    border-radius: 0 0 18px 18px;
+  }
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--accent1);
+    border-radius: 26px;
+    border: 2.5px solid var(--glass-shadow);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--primary);
+  }
+  @media (max-width: 720px) {
+    h1 { font-size: 2.5rem; }
+    nav a { padding: 9px 14px; font-size: 1rem; }
+    section { padding: 28px 10px 18px 10px; }
+    .bio-illustration { width: 96px; height: 96px; margin-left: 18px; }
+    .project-card { font-size: 1rem; padding: 18px 14px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <button class="theme-toggle" title="Toggle theme">🌙</button>
+  <h1>Dipan Das</h1>
+  <div class="tagline">Creative CSE Student</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#timeline">Journey</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about">
+    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/1f9b2853-bfd3-460d-8b8f-30f5b368a858.png" alt="Professional 3D Male Avatar" class="bio-illustration"/>
+    <h2>About Me</h2>
+    <p>Based in Garia, Kolkata, West Bengal, India, I am currently a second-year Computer Science Engineering student at Budge Budge Institute of Technology. I thrive on creativity and welcome project ideas and technical challenges. Interested in full-stack web development and expanding into game development in the future.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <div class="skill-card">C (Expert)</div>
+      <div class="skill-card">HTML (Expert)</div>
+      <div class="skill-card">Python (Learning)</div>
+      <div class="skill-card">JavaScript (Learning)</div>
+      <div class="skill-card">C++ (To Learn)</div>
+      <div class="skill-card">CSS (To Learn)</div>
+      <div class="skill-card">Java (To Learn)</div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <h2>My Journey</h2>
+    <div class="timeline">
+      <div class="milestone"><strong>2022:</strong><br>Completed Class 10 at Swami Pranabananda Vidyapith</div>
+      <div class="milestone"><strong>2024:</strong><br>Completed Class 12 at Naktala High School</div>
+      <div class="milestone"><strong>2024:</strong><br>Enrolled at Budge Budge Institute of Technology (CSE)</div>
+      <div class="milestone"><strong>2025:</strong><br>Building portfolio and Wikipedia Fetcher projects in second year</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card"><strong>Portfolio Website</strong><br>Personal portfolio built with modern, 3D-inspired UI.</div>
+      <div class="project-card"><strong>Wikipedia Fetcher</strong><br>Fetches live Wikipedia summaries with a stylish, 3D-themed web app.</div>
+      <div class="project-card"><strong>[More Coming soon!]</strong><br>Next completed projects will be notified here.</div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2>Contact</h2>
+    <button class="contact-btn">Get in Touch</button>
+  </section>
+</main>
+
+<div class="contact-modal" id="modal">
+  <button class="modal-close" title="Close">&times;</button>
+  <h2>Contact Me</h2>
+  <p>Email: <a href="mailto:rafaeldian99@gmail.com">rafaeldian99@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/rafaeldian99-cloud50" target="_blank">github.com/rafaeldian99-cloud50</a></p>
+</div>
+
+<footer>
+  &copy; 2025 Dipan Das. Portfolio created with passion and creativity.
+</footer>
+
+<script>
+  // GSAP animations for smooth entrance
+  window.addEventListener('load', () => {
+    gsap.from('header h1, header .tagline, nav a', { y: -40, opacity: 0, stagger: 0.13, duration: 1, ease: 'power2.out' });
+    gsap.from('.bio-illustration', { scale: 0.7, opacity: 0, duration: 1.3, delay: 0.5, ease: 'elastic.out(1, 0.5)' });
+    gsap.from('.skills-list .skill-card', { y: 80, opacity: 0, stagger: 0.15, delay: 0.7, ease: 'power2.out' });
+    gsap.from('.timeline .milestone', { scale: 0.6, opacity: 0, stagger: 0.17, delay: 0.9, ease: 'back.out(1.2)' });
+    gsap.from('.projects-grid .project-card', { y: 60, opacity: 0, stagger: 0.17, delay: 1, ease: 'power2.out' });
+  });
+
+  // Theme toggle logic
+  const themeToggle = document.querySelector('.theme-toggle');
+  themeToggle.addEventListener('click', function () {
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      this.textContent = '🌙';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      this.textContent = '☀️';
+    }
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('nav a').forEach(link =>
+    link.addEventListener('click', evt => {
+      evt.preventDefault();
+      document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    })
+  );
+
+  // Contact modal functionality
+  const modal = document.getElementById('modal');
+  const contactBtn = document.querySelector('.contact-btn');
+  const modalClose = document.querySelector('.modal-close');
+
+  contactBtn.addEventListener('click', () => {
+    modal.classList.add('active');
+  });
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+  window.addEventListener('click', evt => {
+    if (evt.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+</script>
+</body>
+</html>
