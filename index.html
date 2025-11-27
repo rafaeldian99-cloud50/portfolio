@@ -1,396 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dipan Das - Creative CSE Portfolio</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<style>
-  /* Root colors */
-  :root {
-    --primary: #0b1120;
-    --accent1: #00b0ff;
-    --accent2: #00ffc4;
-    --card-bg: rgba(255 255 255 / 0.15);
-    --glass-shadow: rgba(255 255 255 / 0.3);
-    --text-light: #f0f0f5;
-    --text-dark: #12171f;
-    --bg-light: #e0e9f7;
-    --bg-dark: #0b1120;
-  }
-  [data-theme="dark"] {
-    --primary: #0b1120;
-    --accent1: #00b0ff;
-    --accent2: #00ffc4;
-    --card-bg: rgba(10 30 50 / 0.25);
-    --glass-shadow: rgba(15 45 65 / 0.6);
-    --text-light: #dce4f2;
-    --text-dark: #f0f0f5;
-    --bg-light: #0a1624;
-    --bg-dark: #0b1120;
-  }
-  /* Base */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(-45deg, var(--accent1), var(--accent2), var(--primary));
-    background-size: 400% 400%;
-    animation: gradientShift 14s ease infinite;
-    color: var(--text-dark);
-    overflow-x: hidden;
-    transition: background 0.5s, color 0.5s;
-  }
-  @keyframes gradientShift {
-    0%,100% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-  }
-  header {
-    text-align: center;
-    padding: 90px 10px 70px 10px;
-    margin-bottom: 42px;
-    color: var(--text-light);
-  }
-  h1 {
-    font-size: 3.2rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-    text-shadow: 1.8px 1.8px 6px rgba(0, 0, 0, 0.48);
-  }
-  .tagline {
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: 1.3px;
-    opacity: 0.85;
-    margin-bottom: 20px;
-  }
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 36px;
-  }
-  nav a {
-    color: var(--text-light);
-    font-weight: 600;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 25px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    backdrop-filter: brightness(2);
-  }
-  nav a:hover {
-    background: var(--text-light);
-    color: var(--primary);
-    box-shadow: 0 0 12px var(--text-light);
-  }
-  .theme-toggle {
-    position: fixed;
-    top: 24px;
-    right: 30px;
-    background: var(--text-light);
-    color: var(--primary);
-    font-size: 1.35rem;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
-    box-shadow: 0 4px 13px rgba(0, 255, 205, 0.54);
-    transition: background 0.3s ease;
-    z-index: 2000;
-  }
-  main {
-    max-width: 960px;
-    padding: 0 20px 60px 20px;
-    margin: 0 auto 0 auto;
-  }
-  section {
-    margin-bottom: 54px;
-    background: var(--card-bg);
-    padding: 34px 28px 28px 28px;
-    border-radius: 23px;
-    box-shadow: 0 4px 20px var(--glass-shadow);
-    backdrop-filter: blur(9px);
-    color: var(--text-light);
-    transition: background 0.35s ease, color 0.35s ease;
-  }
-  h2 {
-    font-weight: 900;
-    font-size: 2.3rem;
-    margin-bottom: 22px;
-    border-bottom: 3px solid var(--text-light);
-    padding-bottom: 12px;
-  }
-  .bio-illustration {
-    float: right;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    box-shadow: 0 0 35px 5px var(--text-light);
-    margin-left: 22px;
-    object-fit: cover;
-    filter: drop-shadow(0 6px 5px #00ffc4aa);
-  }
-  .skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-  .skill-card {
-    background: var(--card-bg);
-    padding: 14px 26px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1.05rem;
-    box-shadow: inset 0 0 18px 2px var(--accent2);
-    cursor: default;
-    user-select: none;
-    transition: transform 0.31s ease;
-  }
-  .skill-card:hover {
-    transform: translateY(-6px) scale(1.06);
-    box-shadow: inset 0 0 26px 3px var(--accent1);
-  }
-  .timeline {
-    display: flex;
-    overflow-x: auto;
-    gap: 32px;
-    padding-bottom: 10px;
-  }
-  .milestone {
-    min-width: 210px;
-    border-radius: 18px;
-    background: var(--card-bg);
-    box-shadow: 0 4px 24px var(--glass-shadow);
-    padding: 16px 18px 18px 18px;
-    font-weight: 700;
-    font-size: 1.03rem;
-    cursor: default;
-    user-select: none;
-    transition: background 0.3s ease;
-  }
-  .milestone:hover {
-    background: var(--accent2);
-    color: var(--primary);
-    box-shadow: 0 11px 30px #00ffd0cc;
-  }
-  .projects-grid {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  }
-  .project-card {
-    background: var(--card-bg);
-    border-radius: 28px;
-    box-shadow: 0 4px 26px var(--glass-shadow);
-    padding: 22px 21px 24px 21px;
-    font-weight: 700;
-    font-size: 1.17rem;
-    cursor: pointer;
-    transition: transform 0.36s ease, box-shadow 0.36s ease;
-  }
-  .project-card:hover {
-    transform: translateY(-5px) scale(1.08);
-    box-shadow: 0 14px 38px #00ffe8aa;
-    background: var(--accent2);
-    color: var(--primary);
-  }
-  .contact-section {
-    text-align: center;
-  }
-  .contact-btn {
-    background: var(--accent1);
-    color: var(--primary);
-    border-radius: 36px;
-    box-shadow: 0 0 32px #00ffe8cc;
-    cursor: pointer;
-    font-weight: 900;
-    padding: 18px 46px;
-    font-size: 1.37rem;
-    border: none;
-    transition: box-shadow 0.32s ease;
-  }
-  .contact-btn:hover {
-    box-shadow: 0 0 46px 8px #00fffacc;
-  }
-  .contact-modal {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    min-width: 340px;
-    max-width: 96vw;
-    padding: 38px 28px;
-    background: var(--card-bg);
-    box-shadow: 0 13px 47px var(--glass-shadow);
-    border-radius: 18px;
-    transition: transform 0.33s ease;
-    text-align: left;
-    z-index: 1100;
-  }
-  .contact-modal.active {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  .modal-close {
-    position: absolute;
-    top: 15px;
-    right: 24px;
-    font-size: 2.1rem;
-    color: var(--accent1);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  footer {
-    text-align: center;
-    padding: 18px 0;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 1.1px;
-    color: var(--text-light);
-    background: var(--primary);
-    border-radius: 0 0 18px 18px;
-  }
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--accent1);
-    border-radius: 26px;
-    border: 2.5px solid var(--glass-shadow);
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--primary);
-  }
-  @media (max-width: 720px) {
-    h1 { font-size: 2.5rem; }
-    nav a { padding: 9px 14px; font-size: 1rem; }
-    section { padding: 28px 10px 18px 10px; }
-    .bio-illustration { width: 96px; height: 96px; margin-left: 18px; }
-    .project-card { font-size: 1rem; padding: 18px 14px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipan Das - Interactive Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. Global Styles, Variables & Fixed Elements --- */
+        :root {
+            --primary-color: #00bcd4; /* Brighter Cyan for contrast */
+            --secondary-color: #0077b6; /* Deep Blue for accents */
+            --text-light: #e0e0e0;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.95); /* High opacity for text readability */
+            --card-hover-bg: rgba(35, 35, 35, 0.98);
+            --shadow-3d: 0 15px 35px rgba(0, 0, 0, 0.8);
+            --padding-unit: 25px;
+        }
+
+        /* Essential for 3D and Smoothness */
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: var(--text-light);
+            line-height: 1.7;
+            background-color: var(--bg-dark);
+            perspective: 1000px; 
+            cursor: none; /* Hides default cursor */
+        }
+        
+        /* Fixed Background - Enhanced Dark Overlay */
+        .background-fixed {
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; 
+            background-image: url('wp12508794-hells-paradise-4k-wallpapers (1).jpg'); 
+            background-size: cover;
+            background-position: center center;
+            background-blend-mode: multiply;
+            background-color: rgba(0, 0, 0, 0.85); /* Strong dark overlay */
+        }
+        
+        /* Fixed Header (Minimal) */
+        .hero-fixed {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 10px 0; /* Adjusted padding */
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+            z-index: 100; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+        }
+        .hero-info {
+            text-align: center;
+            padding: 5px 0;
+        }
+        .hero-fixed h1 { font-size: 1.8em; margin: 0; font-weight: 700; color: var(--primary-color); }
+        .hero-fixed p { font-size: 0.9em; margin: 2px 0 0 0; color: rgba(255, 255, 255, 0.8); }
+        .spacer { height: 150px; } /* Increased spacer height for the larger avatar */
+
+        /* --- UPDATED: Avatar Styling (80x80) --- */
+        .avatar {
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 4px solid var(--primary-color); 
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.9); 
+            margin-bottom: 8px; 
+        }
+
+        /* --- 2. Content & Typography --- */
+        .container {
+            max-width: 950px; /* Tighter width for better content flow */
+            margin: 0 auto;
+            padding: var(--padding-unit);
+            position: relative; 
+        }
+        section {
+            padding: 100px 0 50px 0; 
+            min-height: 90vh; 
+            will-change: transform; 
+        }
+        h2 {
+            font-size: 3em;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); 
+        }
+
+        /* --- 3. Fixed Navigation Bar (TOP RIGHT) --- */
+        .nav-fixed {
+            position: fixed;
+            right: 0;
+            top: 15%; /* Aligned to the top right */
+            transform: none; 
+            z-index: 90;
+            padding: 10px 5px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px 0 0 10px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        .nav-fixed a {
+            display: block; color: var(--text-light); text-decoration: none;
+            padding: 10px 15px; margin: 5px 0;
+            border-left: 3px solid transparent; transition: all 0.3s;
+            font-weight: 600;
+        }
+        .nav-fixed a:hover {
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        /* --- 4. 3D Tilt Card Styling --- */
+        .card {
+            background: var(--card-bg);
+            padding: var(--padding-unit);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-3d);
+            backdrop-filter: blur(8px);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s;
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform, box-shadow;
+        }
+        /* The Magic: Tilt on Hover */
+        .card:hover {
+            transform: rotateX(2deg) rotateY(-2deg) translateZ(10px); 
+            box-shadow: 0 20px 50px rgba(0, 188, 212, 0.6); 
+        }
+
+        .project-item h3 {
+            color: var(--primary-color);
+            background: linear-gradient(to right, var(--secondary-color), transparent);
+            padding: 5px 10px;
+            margin: -25px -25px 15px -25px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            font-size: 1.6em;
+            font-weight: 700;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(0, 119, 182, 0.5);
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.7);
+        }
+        
+        /* --- 5. Custom Cursor (The visual element) --- */
+        #custom-cursor {
+            position: absolute;
+            width: 25px; 
+            height: 25px;
+            border-radius: 50%;
+            pointer-events: none; 
+            background: radial-gradient(circle, var(--primary-color) 0%, rgba(0, 188, 212, 0.4) 50%, transparent 70%);
+            opacity: 0.7;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s, opacity 0.5s;
+            z-index: 1000; 
+            filter: blur(5px);
+        }
+
+        /* --- 6. Contact Form Specific CSS --- */
+        .contact-form-group { margin-bottom: 20px; text-align: left; }
+        .contact-form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-color); }
+        .contact-form-group input, .contact-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5); 
+            color: var(--text-light);
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        #form-response-message { margin-top: 15px; font-weight: 600; }
+
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-fixed { display: none; }
+            .hero-fixed h1 { font-size: 1.5em; }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <button class="theme-toggle" title="Toggle theme">🌙</button>
-  <h1>Dipan Das</h1>
-  <div class="tagline">Creative CSE Student</div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#timeline">Journey</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
 
-<main>
-  <section id="about">
-    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/1f9b2853-bfd3-460d-8b8f-30f5b368a858.png" alt="Professional 3D Male Avatar" class="bio-illustration"/>
-    <h2>About Me</h2>
-    <p>Based in Garia, Kolkata, West Bengal, India, I am currently a second-year Computer Science Engineering student at Budge Budge Institute of Technology. I thrive on creativity and welcome project ideas and technical challenges. Interested in full-stack web development and expanding into game development in the future.</p>
-  </section>
+    <div id="custom-cursor"></div>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-list">
-      <div class="skill-card">C (Expert)</div>
-      <div class="skill-card">HTML (Expert)</div>
-      <div class="skill-card">Python (Learning)</div>
-      <div class="skill-card">JavaScript (Learning)</div>
-      <div class="skill-card">C++ (To Learn)</div>
-      <div class="skill-card">CSS (To Learn)</div>
-      <div class="skill-card">Java (To Learn)</div>
-    </div>
-  </section>
+    <div class="background-fixed"></div>
 
-  <section id="timeline">
-    <h2>My Journey</h2>
-    <div class="timeline">
-      <div class="milestone"><strong>2022:</strong><br>Completed Class 10 at Swami Pranabananda Vidyapith</div>
-      <div class="milestone"><strong>2024:</strong><br>Completed Class 12 at Naktala High School</div>
-      <div class="milestone"><strong>2024:</strong><br>Enrolled at Budge Budge Institute of Technology (CSE)</div>
-      <div class="milestone"><strong>2025:</strong><br>Building portfolio and Wikipedia Fetcher projects in second year</div>
-    </div>
-  </section>
+    <header class="hero-fixed">
+        <img src="dipan.jpg" alt="Dipan Das Avatar - Japanese Style" class="avatar">
+        <div class="hero-info">
+            <h1>Dipan Das</h1>
+            <p class="tagline">Creative CSE student building interactive web experiences and game-inspired projects from Kolkata, India.</p>
+        </div>
+    </header>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card"><strong>Portfolio Website</strong><br>Personal portfolio built with modern, 3D-inspired UI.</div>
-      <div class="project-card"><strong>Wikipedia Fetcher</strong><br>Fetches live Wikipedia summaries with a stylish, 3D-themed web app.</div>
-      <div class="project-card"><strong>[More Coming soon!]</strong><br>Next completed projects will be notified here.</div>
-    </div>
-  </section>
+    <nav class="nav-fixed">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-  <section id="contact" class="contact-section">
-    <h2>Contact</h2>
-    <button class="contact-btn">Get in Touch</button>
-  </section>
-</main>
+    <div class="spacer"></div>
+    
+    <div class="container">
 
-<div class="contact-modal" id="modal">
-  <button class="modal-close" title="Close">&times;</button>
-  <h2>Contact Me</h2>
-  <p>Email: <a href="mailto:rafaeldian99@gmail.com">rafaeldian99@gmail.com</a></p>
-  <p>GitHub: <a href="https://github.com/rafaeldian99-cloud50" target="_blank">github.com/rafaeldian99-cloud50</a></p>
-</div>
+        <section id="about" class="parallax-section">
+            <h2>About Me</h2>
+            <div class="card">
+                <p>
+                    I am a second-year B.Tech Computer Science and Engineering student at Budge Budge Institute of Technology, Kolkata, with a strong interest in full-stack web development, interactive UI, and game development. I focus on creating practical, visually engaging projects using lightweight, browser-based tools, proving that impactful applications can be built without heavy local installations.
+                </p>
+                <p>
+                    My work combines clean design, animation, and storytelling—ranging from modern portfolio sites and utility tools to concept-level game and AI projects. I enjoy breaking down ideas into clear plans and turning them into working prototypes that showcase both technical skills and creativity.
+                </p>
+                <div style="background: rgba(0, 0, 0, 0.4); padding: 15px; margin-top: 25px; border-radius: 8px;">
+                    <p style="margin: 0; font-style: italic;">
+                        Professional Focus: I am currently focused on strengthening my foundations in full-stack development and gradually moving into game development and interactive storytelling. I enjoy leading with ideas, planning features end-to-end, and building projects that are both technically sound and engaging for users.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-<footer>
-  &copy; 2025 Dipan Das. Portfolio created with passion and creativity.
-</footer>
+        <section id="skills" class="parallax-section">
+            <h2>Skills & Expertise</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Programming Languages</h3>
+                    <p>C, Python, HTML, CSS, JavaScript.</p>
+                </div>
+                <div class="card">
+                    <h3>Focus Areas</h3>
+                    <p>Full-stack concepts, responsive UI, interactive web apps, game design ideas, AI/analytics systems.</p>
+                </div>
+                <div class="card">
+                    <h3>Tools & Workflow</h3>
+                    <p>Notepad, online compilers, GitHub, and browser-based platforms for development and deployment.</p>
+                </p>
+                </div>
+            </div>
+        </section>
 
-<script>
-  // GSAP animations for smooth entrance
-  window.addEventListener('load', () => {
-    gsap.from('header h1, header .tagline, nav a', { y: -40, opacity: 0, stagger: 0.13, duration: 1, ease: 'power2.out' });
-    gsap.from('.bio-illustration', { scale: 0.7, opacity: 0, duration: 1.3, delay: 0.5, ease: 'elastic.out(1, 0.5)' });
-    gsap.from('.skills-list .skill-card', { y: 80, opacity: 0, stagger: 0.15, delay: 0.7, ease: 'power2.out' });
-    gsap.from('.timeline .milestone', { scale: 0.6, opacity: 0, stagger: 0.17, delay: 0.9, ease: 'back.out(1.2)' });
-    gsap.from('.projects-grid .project-card', { y: 60, opacity: 0, stagger: 0.17, delay: 1, ease: 'power2.out' });
-  });
+        <section id="projects" class="parallax-section">
+            <h2>Projects & Interests</h2>
+            <div class="grid-3">
+                
+                <div class="card project-item">
+                    <h3>Portfolio Website</h3>
+                    <p>Interactive personal portfolio with 3D-inspired UI, smooth animations, and sections for projects, skills, and contact. Designed for a standout, modern web presence.</p>
+                    <a href="#projects" class="btn">View Project (Mock)</a>
+                </div>
+                
+                <div class="card project-item">
+                    <h3>Web Utilities</h3>
+                    <p>Wikipedia Fetcher and To-Do List–style apps demonstrating JavaScript, DOM manipulation, form handling, and clean interface design.</p>
+                    <a href="#projects" class="btn">Learn More</a>
+                </div>
 
-  // Theme toggle logic
-  const themeToggle = document.querySelector('.theme-toggle');
-  themeToggle.addEventListener('click', function () {
-    if (document.documentElement.getAttribute('data-theme') === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      this.textContent = '🌙';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      this.textContent = '☀️';
-    }
-  });
+                <div class="card project-item">
+                    <h3>Concept Projects</h3>
+                    <p>AI-powered attendance/analytics system & personal story hub with admin/audience views. Game ideas inspired by “Fears to Fathom” and eFootball/FC.</p>
+                    <a href="#projects" class="btn">View Concepts</a>
+                </div>
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('nav a').forEach(link =>
-    link.addEventListener('click', evt => {
-      evt.preventDefault();
-      document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    })
-  );
+            </div>
+        </section>
 
-  // Contact modal functionality
-  const modal = document.getElementById('modal');
-  const contactBtn = document.querySelector('.contact-btn');
-  const modalClose = document.querySelector('.modal-close');
+        <section id="contact" class="parallax-section">
+            <h2>Get In Touch</h2>
+            <div class="card" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+                
+                <div id="initial-contact-view" style="text-align: center;">
+                    <p>I'm open to discussing new ideas, development opportunities, and creative collaborations.</p>
+                    <button id="show-form-btn" class="btn" style="font-size: 1.2em;">EMAIL DIPAN</button>
+                </div>
 
-  contactBtn.addEventListener('click', () => {
-    modal.classList.add('active');
-  });
-  modalClose.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
-  window.addEventListener('click', evt => {
-    if (evt.target === modal) {
-      modal.classList.remove('active');
-    }
-  });
-</script>
+                <div id="full-contact-form-container" style="display: none;">
+                    
+                    <form id="contact-form" action="https://formspree.io/f/mrbwkzda" method="POST">
+                        <div class="contact-form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" name="name" required> 
+                        </div>
+                        
+                        <div class="contact-form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="_replyto" required>
+                        </div>
+                        
+                        <div class="contact-form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="submit-btn" style="width: 100%; font-size: 1.2em;">Send Message</button>
+                        <div id="form-response-message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 1. Custom Cursor Functionality
+        const cursor = document.getElementById('custom-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. Subtle Content Parallax Scroll Effect
+        const parallaxSections = document.querySelectorAll('.parallax-section');
+        const parallaxSpeed = 0.05; 
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            parallaxSections.forEach(section => {
+                const offset = scrollY * -parallaxSpeed;
+                section.style.transform = `translateY(${offset}px)`;
+            });
+        });
+
+        // Optional: Hover effect for links/buttons to change cursor size/opacity
+        const interactiveElements = document.querySelectorAll('a, .btn, .card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '40px'; 
+                cursor.style.height = '40px';
+                cursor.style.opacity = '1';
+                cursor.style.filter = 'blur(10px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '25px'; 
+                cursor.style.height = '25px';
+                cursor.style.opacity = '0.7';
+                cursor.style.filter = 'blur(5px)';
+            });
+        });
+
+        // 3. Toggle Form Visibility (Button Click)
+        document.getElementById('show-form-btn').addEventListener('click', function() {
+            document.getElementById('initial-contact-view').style.display = 'none';
+            document.getElementById('full-contact-form-container').style.display = 'block';
+        });
+
+
+        // 4. Form Submission Logic (MODIFIED for Email API)
+        
+        // We use the Fetch API to submit the form data asynchronously (without refreshing the page)
+        const form = document.getElementById('contact-form');
+        const responseDiv = document.getElementById('form-response-message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Use FormData to easily grab all fields from the form
+            const data = new FormData(form);
+            
+            // Show sending status
+            submitBtn.textContent = "Sending...";
+            responseDiv.textContent = "";
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Success: Replace the form with the confirmation message
+                    document.getElementById('full-contact-form-container').innerHTML = 
+                        '<h3 style="color:var(--primary-color);">Message Sent!</h3>' +
+                        '<p>Thank you for reaching out. Your message has been sent to Dipan’s inbox, and he will respond soon.</p>' +
+                        '<p style="font-size:0.9em;"></p>';
+                } else {
+                    // Error: Handle non-success response (e.g., rate limit, invalid key)
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            responseDiv.textContent = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            responseDiv.textContent = "ERROR: Failed to send message. Please try again later.";
+                        }
+                        responseDiv.style.color = '#f5576c';
+                        submitBtn.textContent = "Send Message";
+                    })
+                }
+            }).catch(error => {
+                responseDiv.textContent = "ERROR: Network failure. Check your connection.";
+                responseDiv.style.color = '#f5576c';
+                submitBtn.textContent = "Send Message";
+            });
+        });
+    </script>
+
 </body>
 </html>
